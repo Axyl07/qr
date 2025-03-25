@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator & Scanner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Inclusive+Sans:ital@0;1&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+        </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="generator">
+            <h1>QR Code Generator</h1>
+            <form method="POST">
+                <input type="text" name="qr_data" placeholder="Enter text or URL" required>
+                <button type="submit">Generate QR Code</button>
+            </form>
+            
+            {% if qr_code %}
+            <h2>Generated QR Code:</h2>
+            <img src="{{ qr_code }}" alt="QR Code">
+            <br>
+            <a class="link" href="{{ url_for('download_qr', filename=filename) }}">Download QR Code</a>
+        {% endif %}
+        </div>
+    
+    
+        <div class="scanner">
+            <h1>QR Code Scanner</h1>
+            <form method="POST" action="/scan" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit">Scan QR Code</button>
+            </form>
+            {% if scanned_data %}
+                <h2>Scanned Data:</h2>
+                <p>{{ scanned_data }}</p>
+            {% endif %}
+    
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let inputField = document.getElementById("qr_input"); // Change this ID to match your input field
+    
+            inputField.addEventListener("focus", function () {
+                if (window.location.pathname !== "/") {
+                    history.pushState({}, "", "/");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

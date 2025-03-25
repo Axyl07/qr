@@ -1,0 +1,65 @@
+* {
+  font-family: "Roboto Mono";
+  color: rgb(0, 0, 0);
+}
+
+input{
+    font-size: 0.75rem;
+    border-radius: 50px;
+    border: none;
+    padding: 10px 20px;
+}
+
+body {
+    height: 100vh;
+/* background-repeat: no-repeat; */
+/* From https://css.glass */
+background: rgba(5, 86, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(12.8px);
+-webkit-backdrop-filter: blur(12.8px);
+border: 1px solid rgba(5, 86, 255, 0.3);
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+/* .main-container{
+    display: flex;
+} */
+.scanner{
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+  width: 50%;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.link{
+    background-color: aquamarine;
+    border: 2px solid black;
+    padding: 2px 15px;
+    color: black;
+    border-radius: 50px;
+}
+
+button {
+    font-size: 0.75rem;
+  background: aquamarine;
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #0056b3;
+}
