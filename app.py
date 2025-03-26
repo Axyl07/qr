@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, send_file
 import qrcode
-import qrcode.image.svg
 import cv2
 import numpy as np
 import os
@@ -12,7 +11,6 @@ UPLOAD_FOLDER = os.path.join("static", "qr_codes")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Create folder if it doesn't exist
 
 # QR Code Generator function (Route)
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     qr_code_url = None  # URL to display the QR code
@@ -29,22 +27,26 @@ def index():
             qr = qrcode.make(data)
             qr.save(qr_code_path)
 
-            qr_code_url = f"/{qr_code_path}"  # Flask URL path for the QR code
+            qr_code_url = f"/static/qr_codes/{filename}"  # Fixed URL path
 
             print(f"Generated QR Code: {qr_code_url}")  # Debugging output
 
     return render_template("index.html", qr_code=qr_code_url, filename=filename)
 
-# Route (function) to download the QR code as an SVG file
+# Route to download the QR code as an SVG file
 @app.route("/download/<filename>")
 def download_qr(filename):
     file_path = os.path.join(UPLOAD_FOLDER, filename)
+    
+    if not os.path.exists(file_path):
+        return "Error: File not found", 404
+
     return send_file(file_path, as_attachment=True)
 
 # QR Code Scanner Route
 @app.route("/scan", methods=["POST"])
 def scan_qr():
-    file = request.files["file"]
+    file = request.files.get("file")  # Use .get() to prevent KeyError
     if file:
         file_path = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(file_path)
@@ -63,7 +65,6 @@ def scan_qr():
         return render_template("index.html", scanned_data=data)
 
     return "No QR Code found", 400
-
 
 if __name__ == "__main__":
     app.run(debug=True)

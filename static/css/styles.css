@@ -1,14 +1,39 @@
 * {
   font-family: "Roboto Mono";
   color: rgb(0, 0, 0);
+  font-size: 1.25rem;
 }
 
 input{
-    font-size: 0.75rem;
+    /* font-size: 1.25rem; */
     border-radius: 50px;
     border: none;
     padding: 10px 20px;
 }
+input[type="file"]::file-selector-button{
+  font-size: 1.25rem;
+  background: aquamarine;
+  color: black;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 15px;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 15px;
+  margin-right: 25px;
+  /* border-radius: 5px; */
+}
+input[type="file"]::file-selector-button:hover{
+  background: #0056b3;
+  color: white;
+}
+
+/* .generator{
+  width: fit-content;
+  border: 2px solid violet;
+  border-radius: 25px;
+  padding: 25px;
+} */
 
 body {
     height: 100vh;
@@ -51,15 +76,16 @@ border: 1px solid rgba(5, 86, 255, 0.3);
 }
 
 button {
-    font-size: 0.75rem;
+    font-size: 1.25rem;
   background: aquamarine;
   color: black;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 50px;
 }
 
 button:hover {
   background: #0056b3;
+  color: white;
 }
